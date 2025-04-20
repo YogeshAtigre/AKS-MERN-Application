@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+      labels:
+        app: profile
+    spec:
+      containers:
+        - name: profile
+          image: <acr-name>.azurecr.io/profile-service:latest
+          ports:
+            - containerPort: 3002
+          env:
+            - name: MONGO_URL
+              value: "<your-mongo-connection-string>"
